@@ -17,12 +17,11 @@ connection.connect(function (err) {
       connection.query("USE nodeProject", function (err, result) {
         if (err) throw err;
         console.log("Database selected");
-        // Create the users table
         const tables = require("./tables");
         Promise.all([
           tables.createUsersTable(),
-          tables.createPresentationTable(),
-          tables.createPresentationSectionTable(),
+          tables.createPresentationsTable(),
+          tables.createPresentationSectionsTable(),
           tables.createPicturesTable(),
         ])
           .then(() => {

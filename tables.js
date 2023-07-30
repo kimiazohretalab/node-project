@@ -1,4 +1,4 @@
-const con = require("./database");
+const db = require("./database");
 
 function createUsersTable() {
   const sql = `
@@ -12,7 +12,7 @@ function createUsersTable() {
   `;
 
   return new Promise((resolve, reject) => {
-    con.query(sql, (err, result) => {
+    db.query(sql, (err, result) => {
       if (err) return reject(err);
       console.log("Users table created");
       resolve(result);
@@ -20,7 +20,7 @@ function createUsersTable() {
   });
 }
 
-function createPresentationTable() {
+function createPresentationsTable() {
     const sql = `
     CREATE TABLE IF NOT EXISTS presentations (
       id INT AUTO_INCREMENT PRIMARY KEY,
@@ -33,14 +33,14 @@ function createPresentationTable() {
   `;
 
   return new Promise((resolve, reject) => {
-    con.query(sql, (err, result) => {
+    db.query(sql, (err, result) => {
       if (err) return reject(err);
       console.log("presentations table created");
       resolve(result);
     });
   });
 }
-function createPresentationSectionTable() {
+function createPresentationSectionsTable() {
     const sql = `
     CREATE TABLE IF NOT EXISTS presentation_sections (
       id INT AUTO_INCREMENT PRIMARY KEY,
@@ -53,7 +53,7 @@ function createPresentationSectionTable() {
   `;
 
   return new Promise((resolve, reject) => {
-    con.query(sql, (err, result) => {
+    db.query(sql, (err, result) => {
       if (err) return reject(err);
       console.log("presentation_sections table created");
       resolve(result);
@@ -72,7 +72,7 @@ function createPicturesTable() {
   `;
 
   return new Promise((resolve, reject) => {
-    con.query(sql, (err, result) => {
+    db.query(sql, (err, result) => {
       if (err) return reject(err);
       console.log("pictures table created");
       resolve(result);
@@ -82,7 +82,7 @@ function createPicturesTable() {
 
 module.exports = {
   createUsersTable,
-  createPresentationTable,
-  createPresentationSectionTable,
+  createPresentationsTable,
+  createPresentationSectionsTable,
   createPicturesTable,
 };

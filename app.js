@@ -2,6 +2,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const db = require("./database");
 const usersRoute = require("./routes/users");
+const presentationsRoute = require("./routes/presentations");
 
 const app = express();
 const port = 3000;
@@ -10,7 +11,8 @@ const port = 3000;
 app.use(bodyParser.json());
 
 // Use the users route
-app.use("/api/v1/users", usersRoute);
+app.use("/api/v1/", usersRoute);
+app.use("/api/v1/presentations", presentationsRoute);
 
 // Start the server
 app.listen(port, () => {
