@@ -1,7 +1,7 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const db = require("./database");
-const usersRoute = require("./routes/users"); // Import the users route file
+const usersRoute = require("./routes/users");
 
 const app = express();
 const port = 3000;
