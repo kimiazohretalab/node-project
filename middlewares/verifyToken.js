@@ -1,6 +1,6 @@
-// Middleware to verify JWT token
 const jwt = require("jsonwebtoken");
-const secretKey = "123456";
+require('dotenv').config();
+const secretKey = process.env.secretKey;
 
 function verifyToken(req, res, next) {
     const token = req.headers["authorization"];
@@ -13,8 +13,6 @@ function verifyToken(req, res, next) {
       if (err) {
         return res.status(401).json({ error: "Invalid token" });
       }
-  
-      // Set the decoded user data on the request object for further use in the route
       req.user = decoded;
       next();
     });

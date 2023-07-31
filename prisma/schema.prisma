@@ -1,0 +1,51 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model pictures {
+  id                      Int     @id @default(autoincrement())
+  address                 String? @db.VarChar(255)
+  type                    String? @db.VarChar(255)
+  presentation_section_id @db.Int
+  presentation_sections      presentation_sections      @relation("sectionsPictures", fields: [presentation_section_id])
+
+  @@index([presentation_section_id], map: "presentation_section_id")
+}
+
+model presentation_sections {
+  id              Int     @id @default(autoincrement())
+  title           String? @db.VarChar(255)
+  description     String? @db.VarChar(255)
+  presentation_id @db.Int
+  sort            Int?
+  presentations      presentations      @relation("presentationSections", fields: [presentation_id])
+  pictures     pictures[]    @relation("sectionsPictures")
+
+  @@index([presentation_id], map: "presentation_id")
+}
+
+model presentations {
+  id         Int       @id @default(autoincrement())
+  name       String?   @db.VarChar(255)
+  user_id    @db.Int
+  created_at DateTime? @default(now()) @db.Timestamp(0)
+  updated_at DateTime? @db.Timestamp(0)
+  user      users      @relation("UsersPresentations", fields: [user_id])
+  sections     sections[]    @relation("presentationSections")
+
+  @@index([user_id], map: "user_id")
+}
+
+model users {
+  id         Int       @id @default(autoincrement())
+  name       String?   @db.VarChar(255)
+  salt       String?   @db.VarChar(255)
+  password   String?   @db.VarChar(255)
+  created_at DateTime? @default(now()) @db.Timestamp(0)
+  presentations     presentations[]    @relation("UsersPresentations")
+}
