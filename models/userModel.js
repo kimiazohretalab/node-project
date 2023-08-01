@@ -9,6 +9,14 @@ const getByName = async (name) => {
     throw error;
   }
 };
+const deleteById = async (id) => {
+  try {
+    const user = await prisma.users.delete({ where: { id: id, } });
+    return user; 
+  } catch (error) {
+    throw error;
+  }
+};
 
 const getAll = async () => {
   try {
@@ -44,7 +52,8 @@ module.exports = {
   getByName,
   getAll,
   create,
-  getAllByName
+  getAllByName,
+  deleteById
 };
 
 

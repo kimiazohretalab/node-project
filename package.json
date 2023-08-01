@@ -21,6 +21,7 @@
     "mysql2": "^3.5.2"
   },
   "devDependencies": {
-    "cross-env": "^7.0.3"
+    "cross-env": "^7.0.3",
+    "prisma": "^5.0.0"
   }
 }
