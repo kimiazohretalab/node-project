@@ -73,7 +73,6 @@ const login = async (req, res) => {
 const deleteUser = async (req, res) => {
   try{
     const userId = req.user.userId;
-    console.log(userId);
     await User.deleteById(userId);
     res.status(200).json({
       status: "OK",
